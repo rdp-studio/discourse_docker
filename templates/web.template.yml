@@ -24,6 +24,11 @@ params:
   nginx_worker_connections: 4000
 
 run:
+  - exec:
+      - cd: $home
+      - cmd:
+          - git remote set-url origin https://ghproxy.com/https://github.com/discourse/discourse.git
+          - echo Remote Mirror updated
   - exec: thpoff echo "thpoff is installed!"
   - exec: /usr/local/bin/ruby -e 'if ENV["DISCOURSE_SMTP_ADDRESS"] == "smtp.example.com"; puts "Aborting! Mail is not configured!"; exit 1; end'
   - exec: /usr/local/bin/ruby -e 'if ENV["DISCOURSE_HOSTNAME"] == "discourse.example.com"; puts "Aborting! Domain is not configured!"; exit 1; end'
